@@ -5,7 +5,6 @@ try:
 except ImportError:
     print("python-dotenv not found, using hardcoded values or environment variables")
 
-import telegram
 from telegram.ext import Application, CommandHandler
 from telegram.ext import filters  # Filters ko yahan se import karein
 import requests
@@ -142,7 +141,7 @@ def main():
     else:
         print(hashtags)
 
-    # Use Application instead of Updater
+    # Use Application directly
     application = Application.builder().token(TOKEN).build()
 
     # Add handlers
