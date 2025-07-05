@@ -13,6 +13,7 @@ import re
 import random
 from firebase_admin import credentials, db, initialize_app
 import schedule
+from telegram.ext import ApplicationBuilder
 import time
 import threading
 
@@ -141,8 +142,8 @@ def main():
     else:
         print(hashtags)
 
-    # Use Application directly
-    application = Application.builder().token(TOKEN).build()
+    # Use ApplicationBuilder (v20+ style) – no Updater involved
+    application = ApplicationBuilder().token(TOKEN).build()
 
     # Add handlers
     application.add_handler(CommandHandler("start", start))
@@ -152,6 +153,3 @@ def main():
 
     # Start the bot
     application.run_polling()
-
-if __name__ == "__main__":
-    main()
