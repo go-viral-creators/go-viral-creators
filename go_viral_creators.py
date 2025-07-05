@@ -66,23 +66,23 @@ def scrape_hashtags():
 
 # Scrape captions
 def scrape_captions():
-    url = "https://captionspack.com/captions"  # Replace with actual URL
-    try:
-        response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
-        time.sleep(2)  # Prevent rate limiting
-        soup = BeautifulSoup(response.text, 'html.parser')
-        captions = []
-        # Adjust based on actual HTML structure (inspect the site)
-        for caption in soup.find_all('p', class_='caption'):  # Update class
-            text = caption.text.strip()
-            if text and len(text) > 10:  # Filter out short or empty captions
-                captions.append(text)
-        # Store in Firebase
-        ref = db.reference('/captions')
-        ref.set(captions[:50])
-        return captions[:50]
-    except Exception as e:
-        return f"Error scraping captions: {str(e)}"
+    # Temporary fallback until a working URL is found
+    return CAPTIONS  # Use static captions as fallback
+    # url = "https://captionspack.com/captions"  # Removed this line
+    # try:
+    #     response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+    #     time.sleep(2)  # Prevent rate limiting
+    #     soup = BeautifulSoup(response.text, 'html.parser')
+    #     captions = []
+    #     for caption in soup.find_all('p', class_='caption'):  # Update class based on site
+    #         text = caption.text.strip()
+    #         if text and len(text) > 10:  # Filter out short or empty captions
+    #             captions.append(text)
+    #     ref = db.reference('/captions')
+    #     ref.set(captions[:50])
+    #     return captions[:50]
+    # except Exception as e:
+    #     return f"Error scraping captions: {str(e)}"
 
 # Scrape reel download link
 def scrape_reel_download_link(reel_url):
