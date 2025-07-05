@@ -6,7 +6,7 @@ except ImportError:
     print("python-dotenv not found, using hardcoded values or environment variables")
 
 import telegram
-from telegram.ext import Application, CommandHandler  # Updated to use Application instead of Updater
+from telegram.ext import Application, CommandHandler
 from telegram.ext import filters  # Filters ko yahan se import karein
 import requests
 from bs4 import BeautifulSoup
@@ -64,25 +64,9 @@ def scrape_hashtags():
     except Exception as e:
         return f"Error scraping hashtags: {str(e)}"
 
-# Scrape captions
+# Scrape captions (using static fallback for now)
 def scrape_captions():
-    # Temporary fallback until a working URL is found
-    return CAPTIONS  # Use static captions as fallback
-    # url = "https://captionspack.com/captions"  # Removed this line
-    # try:
-    #     response = requests.get(url, headers={'User-Agent': 'Mozilla/5.0'})
-    #     time.sleep(2)  # Prevent rate limiting
-    #     soup = BeautifulSoup(response.text, 'html.parser')
-    #     captions = []
-    #     for caption in soup.find_all('p', class_='caption'):  # Update class based on site
-    #         text = caption.text.strip()
-    #         if text and len(text) > 10:  # Filter out short or empty captions
-    #             captions.append(text)
-    #     ref = db.reference('/captions')
-    #     ref.set(captions[:50])
-    #     return captions[:50]
-    # except Exception as e:
-    #     return f"Error scraping captions: {str(e)}"
+    return CAPTIONS  # Temporary fallback until a working URL is found
 
 # Scrape reel download link
 def scrape_reel_download_link(reel_url):
@@ -98,7 +82,7 @@ def scrape_reel_download_link(reel_url):
         return f"Error fetching download link: {str(e)}"
 
 # Bot commands
-async def start(update, context):  # Added async for Application
+async def start(update, context):
     await update.message.reply_text(
         "Welcome to InstaBot! Use:\n"
         "/trends - Get trending hashtags\n"
@@ -107,17 +91,16 @@ async def start(update, context):  # Added async for Application
         "Note: Reel downloads are subject to Instagram’s Terms of Service. Use responsibly."
     )
 
-async def trends(update, context):  # Added async
+async def trends(update, context):
     hashtags = scrape_hashtags()
     if isinstance(hashtags, list):
         await update.message.reply_text("Trending Hashtags:\n" + "\n".join(hashtags))
     else:
         await update.message.reply_text(hashtags)
 
-async def caption(update, context):  # Added async
+async def caption(update, context):
     args = context.args
-    ref = db.reference('/captions')
-    captions = ref.get() or CAPTIONS  # Fallback to static list if Firebase empty
+    captions = CAPTIONS  # Using static captions for now
     if args:
         keyword = args[0].lower()
         filtered_captions = [c for c in captions if keyword in c.lower()]
@@ -128,7 +111,7 @@ async def caption(update, context):  # Added async
     else:
         await update.message.reply_text(random.choice(captions))
 
-async def download(update, context):  # Added async
+async def download(update, context):
     try:
         reel_url = context.args[0]
         download_link = scrape_reel_download_link(reel_url)
@@ -138,10 +121,8 @@ async def download(update, context):  # Added async
 
 # Scheduler for daily scraping
 def job():
-    captions = scrape_captions()
     hashtags = scrape_hashtags()
-    print(f"Updated {len(captions if isinstance(captions, list) else 0)} captions, "
-          f"{len(hashtags if isinstance(hashtags, list) else 0)} hashtags")
+    print(f"Updated {len(hashtags if isinstance(hashtags, list) else 0)} hashtags")
 
 schedule.every().day.at("00:00").do(job)
 
@@ -154,12 +135,7 @@ def main():
     # Start scheduler in a separate thread
     threading.Thread(target=run_scheduler, daemon=True).start()
 
-    # Scrape captions and hashtags on startup
-    captions = scrape_captions()
-    if isinstance(captions, list):
-        print(f"Scraped {len(captions)} captions")
-    else:
-        print(captions)
+    # Scrape hashtags on startup
     hashtags = scrape_hashtags()
     if isinstance(hashtags, list):
         print(f"Scraped {len(hashtags)} hashtags")
