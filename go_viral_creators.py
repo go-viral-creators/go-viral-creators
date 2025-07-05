@@ -1,7 +1,13 @@
 import os
-from dotenv import load_dotenv
+try:
+    from dotenv import load_dotenv
+    load_dotenv()  # Load .env file if available
+except ImportError:
+    print("python-dotenv not found, using hardcoded values or environment variables")
+
 import telegram
-from telegram.ext import Updater, CommandHandler
+from telegram.ext import Application, CommandHandler  # Updated to use Application instead of Updater
+from telegram.ext import filters  # Filters ko yahan se import karein
 import requests
 from bs4 import BeautifulSoup
 import re
@@ -11,10 +17,7 @@ import schedule
 import time
 import threading
 
-# Load environment variables if using .env
-load_dotenv()
-
-# Initialize Firebase (use environment variables or hardcode for now)
+# Initialize Firebase (fallback to hardcoded values if .env not found)
 cred = credentials.Certificate({
     "type": os.getenv("FIREBASE_TYPE", "service_account"),
     "project_id": os.getenv("FIREBASE_PROJECT_ID", "go-viral-creators"),
@@ -95,8 +98,8 @@ def scrape_reel_download_link(reel_url):
         return f"Error fetching download link: {str(e)}"
 
 # Bot commands
-def start(update, context):
-    update.message.reply_text(
+async def start(update, context):  # Added async for Application
+    await update.message.reply_text(
         "Welcome to InstaBot! Use:\n"
         "/trends - Get trending hashtags\n"
         "/caption [keyword] - Get a caption (e.g., /caption motivation)\n"
@@ -104,14 +107,14 @@ def start(update, context):
         "Note: Reel downloads are subject to Instagram’s Terms of Service. Use responsibly."
     )
 
-def trends(update, context):
+async def trends(update, context):  # Added async
     hashtags = scrape_hashtags()
     if isinstance(hashtags, list):
-        update.message.reply_text("Trending Hashtags:\n" + "\n".join(hashtags))
+        await update.message.reply_text("Trending Hashtags:\n" + "\n".join(hashtags))
     else:
-        update.message.reply_text(hashtags)
+        await update.message.reply_text(hashtags)
 
-def caption(update, context):
+async def caption(update, context):  # Added async
     args = context.args
     ref = db.reference('/captions')
     captions = ref.get() or CAPTIONS  # Fallback to static list if Firebase empty
@@ -119,19 +122,19 @@ def caption(update, context):
         keyword = args[0].lower()
         filtered_captions = [c for c in captions if keyword in c.lower()]
         if filtered_captions:
-            update.message.reply_text(random.choice(filtered_captions))
+            await update.message.reply_text(random.choice(filtered_captions))
         else:
-            update.message.reply_text(f"No captions found for '{keyword}'. Try another keyword.")
+            await update.message.reply_text(f"No captions found for '{keyword}'. Try another keyword.")
     else:
-        update.message.reply_text(random.choice(captions))
+        await update.message.reply_text(random.choice(captions))
 
-def download(update, context):
+async def download(update, context):  # Added async
     try:
         reel_url = context.args[0]
         download_link = scrape_reel_download_link(reel_url)
-        update.message.reply_text(f"Download Link: {download_link}")
+        await update.message.reply_text(f"Download Link: {download_link}")
     except IndexError:
-        update.message.reply_text("Please provide a reel URL: /download <reel_url>")
+        await update.message.reply_text("Please provide a reel URL: /download <reel_url>")
 
 # Scheduler for daily scraping
 def job():
@@ -163,18 +166,17 @@ def main():
     else:
         print(hashtags)
 
-    updater = Updater(TOKEN, use_context=True)
-    dp = updater.dispatcher
+    # Use Application instead of Updater
+    application = Application.builder().token(TOKEN).build()
 
-    # Command handlers
-    dp.add_handler(CommandHandler("start", start))
-    dp.add_handler(CommandHandler("trends", trends))
-    dp.add_handler(CommandHandler("caption", caption))
-    dp.add_handler(CommandHandler("download", download))
+    # Add handlers
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("trends", trends))
+    application.add_handler(CommandHandler("caption", caption))
+    application.add_handler(CommandHandler("download", download))
 
     # Start the bot
-    updater.start_polling()
-    updater.idle()
+    application.run_polling()
 
 if __name__ == "__main__":
     main()
