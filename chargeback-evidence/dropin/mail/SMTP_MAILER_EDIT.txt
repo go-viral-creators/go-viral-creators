@@ -1,0 +1,24 @@
+mail/smtp_mailer.php mein sirf 2 chhote edits karo (password/SMTP settings ko touch mat karo - isliye maine poori file nahi bheji):
+
+EDIT 1 - function ke parameters mein `$attachments` add karo.
+Dhoondho:
+    $cc = [],
+    $bcc = []
+
+){
+Badal do:
+    $cc = [],
+    $bcc = [],
+    $attachments = []
+
+){
+
+EDIT 2 - `$mail->AltBody = strip_tags($html);` line ke turant baad ye paste karo:
+
+        foreach ((array) $attachments as $att) {
+            if (!empty($att['data'])) {
+                $mail->addStringAttachment($att['data'], $att['name'] ?? 'attachment.pdf', 'base64', $att['type'] ?? 'application/octet-stream');
+            }
+        }
+
+Bas. Bina is edit ke mail phir bhi jaati hai, par PDF attach nahi hoga.
