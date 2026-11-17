@@ -1,0 +1,57 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #fx-rain { position: absolute; inset: 0; opacity: 0.9; }
+    .fx-drop {
+      position: absolute; top: 0; left: 0; width: 2px; border-radius: 2px;
+      background: linear-gradient(to bottom, rgba(190, 215, 245, 0), rgba(190, 215, 245, 0.55));
+    }
+    #fx-grain {
+      position: absolute; inset: -320px; opacity: 0.075;
+      background: url("assets/img/noise.png"); background-size: 512px 512px;
+    }
+    #fx-vig {
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 72% 70% at 50% 50%, rgba(0,0,0,0) 52%, rgba(0,0,0,0.72) 100%);
+    }
+    .fx-bar { position: absolute; left: 0; width: 100%; height: 110px; background: #000; }
+    #fx-bar-t { top: 0; } #fx-bar-b { bottom: 0; }
+  </style>
+  <div id="root" data-composition-id="fx" data-width="1920" data-height="1080">
+    <div id="fx-rain" data-layout-allow-overflow></div>
+    <div id="fx-grain"></div>
+    <div id="fx-vig"></div>
+    <div id="fx-bar-t" class="fx-bar"></div>
+    <div id="fx-bar-b" class="fx-bar"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      // seeded PRNG so every render is identical
+      let s = 20260117;
+      const rnd = () => { s |= 0; s = (s + 0x6d2b79f5) | 0; let t = Math.imul(s ^ (s >>> 15), 1 | s);
+        t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+      const box = document.getElementById("fx-rain");
+      const TAN = Math.tan(14 * Math.PI / 180), SPAN = 1570;
+      for (let i = 0; i < 90; i++) {
+        const d = document.createElement("div");
+        d.className = "fx-drop";
+        const h = 70 + rnd() * 90;
+        d.style.height = h + "px";
+        d.style.opacity = (0.25 + rnd() * 0.55).toFixed(2);
+        box.appendChild(d);
+        gsap.set(d, { rotation: 14, transformOrigin: "50% 0%" });
+        const x0 = -420 + rnd() * 2400, dur = 0.5 + rnd() * 0.35, r = rnd();
+        const y0 = -220 + SPAN * r;
+        tl.fromTo(d, { x: x0 + (y0 + 220) * TAN, y: y0 }, { x: x0 + SPAN * TAN, y: 1350 - 220 + 220, duration: dur * (1 - r), ease: "none" }, 0);
+        tl.fromTo(d, { x: x0, y: -220 }, { x: x0 + SPAN * TAN, y: 1350, duration: dur, ease: "none", repeat: Math.ceil(30 / dur) }, dur * (1 - r));
+      }
+      // grain jitter at 12 fps
+      tl.fromTo("#fx-grain", { x: 0, y: 0 }, { x: -293, y: -187, duration: 30, ease: "steps(360)" }, 0);
+      // rain: on in the cold present, off in the dry warm memory (3.9 - 9.3), returns when she leaves
+      tl.fromTo("#fx-rain", { opacity: 0.9 }, { opacity: 0, duration: 0.3, ease: "power1.in" }, 3.9);
+      tl.fromTo("#fx-rain", { opacity: 0 }, { opacity: 0.95, duration: 0.7, ease: "power2.out" }, 9.3);
+      window.__timelines["fx"] = tl;
+    })();
+  </script>
+</template>

@@ -1,0 +1,60 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050a14; }
+    .s3-bg { position: absolute; left: -240px; top: -135px; width: 2400px; height: 1350px; }
+    .s3-ch { position: absolute; bottom: 125px; }
+    .s3-ch img { display: block; width: 100%; }
+    .s3-ch .s3-pose { position: absolute; left: 0; top: 0; }
+    .s3-ch .s3-pose:first-child { position: relative; }
+    .s3-refl { position: absolute; left: 0; top: 100%; transform: scaleY(-1); opacity: 0.18;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 42%); mask-image: linear-gradient(to bottom, #000 0%, transparent 42%); }
+    #s3-girl { left: 740px; width: 268px; height: 740px; }
+    #s3-boy { left: 1180px; width: 436px; height: 820px; }
+    #s3-warm { position: absolute; left: 960px; top: 540px; width: 1500px; height: 1500px; margin: -750px 0 0 -750px;
+      background: radial-gradient(circle, rgba(255,170,80,0.5), rgba(255,120,60,0) 62%); mix-blend-mode: screen; }
+    #s3-cold-glow { position: absolute; left: 1180px; top: 220px; width: 1100px; height: 1100px; margin: -550px 0 0 -550px; opacity: 0;
+      background: radial-gradient(circle, rgba(70,150,200,0.35), rgba(0,0,0,0) 65%); mix-blend-mode: screen; }
+  </style>
+  <div id="root" data-composition-id="s3" data-width="1920" data-height="1080">
+    <div id="s3-stage" style="position:absolute;inset:0">
+      <img class="s3-bg" src="assets/img/bg_warm.jpg" alt="" />
+      <img id="s3-bg-cold" class="s3-bg" src="assets/img/bg_cold.jpg" alt="" style="opacity:0" />
+      <div id="s3-warm"></div>
+      <div id="s3-cold-glow"></div>
+      <div id="s3-girl" class="s3-ch">
+        <img id="s3-g-front" class="s3-pose" src="assets/img/g_body_front_warm.png" alt="" />
+        <img id="s3-g-back-w" class="s3-pose" src="assets/img/g_body_back_warm.png" alt="" style="opacity:0" />
+        <img id="s3-g-back-c" class="s3-pose" src="assets/img/g_body_back_cold.png" alt="" style="opacity:0" />
+        <img class="s3-refl" src="assets/img/g_body_back_cold.png" alt="" />
+      </div>
+      <div id="s3-boy" class="s3-ch">
+        <img id="s3-b-w" class="s3-pose" src="assets/img/b_body_side_warm.png" alt="" />
+        <img id="s3-b-c" class="s3-pose" src="assets/img/b_body_side_cold.png" alt="" style="opacity:0" />
+        <img class="s3-refl" src="assets/img/b_body_side_cold.png" alt="" />
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#s3-girl", { xPercent: -50, transformOrigin: "50% 100%" });
+      gsap.set("#s3-boy", { xPercent: -50, transformOrigin: "50% 100%" });
+      // hit at 9.3 (local 0.06): she turns away
+      tl.fromTo("#s3-g-front", { opacity: 1 }, { opacity: 0, duration: 0.35, ease: "power1.inOut" }, 0.1);
+      tl.fromTo("#s3-g-back-w", { opacity: 0 }, { opacity: 1, duration: 0.35, ease: "power1.inOut" }, 0.1);
+      // colour drains: warm -> cold
+      tl.fromTo("#s3-g-back-c", { opacity: 0 }, { opacity: 1, duration: 1.1, ease: "power1.inOut" }, 0.5);
+      tl.fromTo("#s3-b-c", { opacity: 0 }, { opacity: 1, duration: 1.1, ease: "power1.inOut" }, 0.5);
+      tl.fromTo("#s3-bg-cold", { opacity: 0 }, { opacity: 1, duration: 1.3, ease: "power1.inOut" }, 0.5);
+      tl.fromTo("#s3-warm", { opacity: 1 }, { opacity: 0, duration: 1.0, ease: "power1.in" }, 0.4);
+      tl.fromTo("#s3-cold-glow", { opacity: 0 }, { opacity: 1, duration: 1.3, ease: "power1.inOut" }, 0.6);
+      // she walks away and dissolves into the rain
+      tl.fromTo("#s3-girl", { x: 0, scale: 1 }, { x: -520, scale: 0.9, duration: 3.4, ease: "power1.in" }, 0.6);
+      tl.fromTo("#s3-girl", { opacity: 1 }, { opacity: 0, duration: 1.5, ease: "power1.in" }, 2.1);
+      // he stays; camera slowly pulls back
+      tl.fromTo("#s3-stage", { scale: 1.08, transformOrigin: "60% 55%" }, { scale: 1.0, duration: 4.36, ease: "power1.out" }, 0);
+      tl.fromTo("#s3-boy", { scale: 1.0 }, { scale: 1.025, duration: 4.0, ease: "sine.inOut" }, 0.3);
+      window.__timelines["s3"] = tl;
+    })();
+  </script>
+</template>
