@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #fx-grain { position: absolute; inset: -320px; opacity: 0.06; background: url("assets/img/noise.png"); background-size: 512px 512px; }
+    #fx-vig { position: absolute; inset: 0; background: radial-gradient(ellipse 75% 72% at 50% 50%, rgba(0,0,0,0) 55%, rgba(0,0,0,0.55) 100%); }
+    #fx-shade { position: absolute; left: 0; bottom: 0; width: 100%; height: 360px; background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0)); }
+    .fx-bar { position: absolute; left: 0; width: 100%; height: 70px; background: #000; }
+    #fx-bar-t { top: 0; } #fx-bar-b { bottom: 0; }
+    #fx-flash { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 50% 30%, #f4f8ff, rgba(200,220,255,0.7) 50%, rgba(160,190,255,0.2)); opacity: 0; }
+    #fx-black { position: absolute; inset: 0; background: #000; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="fx" data-width="1920" data-height="1080">
+    <div id="fx-shade"></div>
+    <div id="fx-grain"></div>
+    <div id="fx-vig"></div>
+    <div id="fx-flash"></div>
+    <div id="fx-black"></div>
+    <div id="fx-bar-t" class="fx-bar"></div>
+    <div id="fx-bar-b" class="fx-bar"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#fx-grain", { x: 0, y: 0 }, { x: -293, y: -187, duration: 186.744, ease: "steps(2240)" }, 0);
+      // open from black
+      tl.fromTo("#fx-black", { opacity: 1 }, { opacity: 0, duration: 1.4, ease: "power1.out" }, 0);
+      // lightning on the bridge cut (storm begins)
+      tl.fromTo("#fx-flash", { opacity: 0 }, { opacity: 0.85, duration: 0.06, ease: "none" }, 117.28);
+      tl.fromTo("#fx-flash", { opacity: 0.85 }, { opacity: 0, duration: 0.5, ease: "power2.out", immediateRender: false }, 117.34);
+      tl.fromTo("#fx-flash", { opacity: 0 }, { opacity: 0.45, duration: 0.05, ease: "none", immediateRender: false }, 132.2);
+      tl.fromTo("#fx-flash", { opacity: 0.45 }, { opacity: 0, duration: 0.45, ease: "power2.out", immediateRender: false }, 132.25);
+      // final fade to black
+      tl.fromTo("#fx-black", { opacity: 0 }, { opacity: 1, duration: 1.4, ease: "power1.in", immediateRender: false }, 185.294);
+      window.__timelines["fx"] = tl;
+    })();
+  </script>
+</template>
