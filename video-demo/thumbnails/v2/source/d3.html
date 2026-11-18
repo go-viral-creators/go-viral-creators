@@ -1,0 +1,19 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+.wall { position:absolute; inset:0; background: radial-gradient(ellipse 60% 70% at 70% 45%, #2a0410 0%, #120207 50%, #050103 100%); }
+svg { position:absolute; left: 640px; top: 40px; width: 600px; height: 520px; }
+.girl { height: 700px; left: -30px; bottom: 0;  -webkit-mask-image: linear-gradient(to bottom,#000 82%,transparent 100%); }
+.w-girl { position:absolute; inset:0; filter: drop-shadow(0 0 40px rgba(255,30,90,.45)); }
+.redlight { position:absolute; inset:0; background: radial-gradient(ellipse 40% 50% at 72% 40%, rgba(255,40,100,.25), transparent 70%); mix-blend-mode: screen; }
+.title { right: 40px; top: 420px; font-size: 128px; color:#fff1f6; text-shadow: 0 0 4px #fff, 0 0 12px #ff3d7f, 0 0 30px #ff1d5e, 0 0 60px #ff0844, 0 0 110px #c3002f; }
+.singer { right: 46px; top: 560px; font-size: 44px; color:#fff; text-shadow: 0 0 10px #ff4d88, 0 3px 0 #000; }
+</style></head><body><div class="stage">
+<div class="wall"></div><div class="redlight"></div>
+<svg viewBox="0 0 600 520"><defs><filter id="n" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="9" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter></defs>
+<g fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#n)">
+<path d="M290 470 C 120 340, 40 250, 60 150 C 80 60, 200 30, 280 120 L 255 190 L 300 245 L 262 310 L 300 360 Z" stroke="#ff2e6e" stroke-width="12" transform="translate(-14,6) rotate(-4 290 300)"/>
+<path d="M310 470 C 480 340, 560 250, 540 150 C 520 60, 400 30, 320 120 L 345 190 L 300 245 L 338 310 L 300 360 Z" stroke="#ff2e6e" stroke-width="12" transform="translate(16,0) rotate(5 310 300)"/>
+<path d="M290 470 C 120 340, 40 250, 60 150 C 80 60, 200 30, 280 120 L 255 190 L 300 245 L 262 310 L 300 360 Z" stroke="#ffd1e0" stroke-width="4" transform="translate(-14,6) rotate(-4 290 300)"/>
+<path d="M310 470 C 480 340, 560 250, 540 150 C 520 60, 400 30, 320 120 L 345 190 L 300 245 L 338 310 L 300 360 Z" stroke="#ffd1e0" stroke-width="4" transform="translate(16,0) rotate(5 310 300)"/></g></svg>
+<div class="w-girl"><img class="cut girl" src="img/girl_coat.png"></div>
+<div class="a title">तेरा इंतज़ार है</div><div class="a singer">BAD DEVIL</div>
+<div class="grain"></div></div></body></html>
