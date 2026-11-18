@@ -1,0 +1,59 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050a14; }
+    .s1-stage { position: absolute; inset: 0; }
+    .s1-bg { position: absolute; left: -240px; top: -135px; width: 2400px; height: 1350px; }
+    #s1-lamp-glow {
+      position: absolute; left: 1230px; top: 80px; width: 900px; height: 900px; margin: -450px 0 0 -450px;
+      background: radial-gradient(circle, rgba(255,225,170,0.62) 0%, rgba(255,190,110,0.22) 34%, rgba(255,170,90,0) 68%);
+      mix-blend-mode: screen;
+    }
+    #s1-pole { position: absolute; left: 1224px; top: 118px; width: 12px; height: 860px; background: linear-gradient(#1a2230, #070b13); border-radius: 6px; }
+    #s1-bulb { position: absolute; left: 1196px; top: 92px; width: 68px; height: 30px; border-radius: 34px 34px 6px 6px; background: #fff4d6; box-shadow: 0 0 60px 26px rgba(255,214,150,0.8); }
+    .s1-ch { position: absolute; bottom: 125px; }
+    .s1-ch img { display: block; width: 100%; }
+    .s1-refl { position: absolute; left: 0; top: 100%; transform: scaleY(-1); opacity: 0.2;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 42%); mask-image: linear-gradient(to bottom, #000 0%, transparent 42%); }
+    #s1-boy { left: 640px; width: 369px; }
+    #s1-face { position: absolute; left: 1010px; bottom: -40px; width: 1130px; }
+    #s1-face img { display: block; width: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 64%, transparent 97%); mask-image: linear-gradient(to bottom, #000 0%, #000 64%, transparent 97%); }
+    #s1-face-glow { position: absolute; left: 1010px; top: 300px; width: 1100px; height: 1100px; margin-left: -150px;
+      background: radial-gradient(circle, rgba(60,140,190,0.35), rgba(0,0,0,0) 65%); mix-blend-mode: screen; }
+  </style>
+  <div id="root" data-composition-id="s1" data-width="1920" data-height="1080">
+    <!-- A: he waits, back to us (0 - 2.1) -->
+    <div id="s1-a" class="s1-stage">
+      <img class="s1-bg" src="assets/img/bg_cold.jpg" alt="" />
+      <div id="s1-lamp-glow"></div>
+      <div id="s1-pole"></div>
+      <div id="s1-bulb"></div>
+      <div id="s1-boy" class="s1-ch">
+        <img src="assets/img/b_body_back_cold.png" alt="" />
+        <img class="s1-refl" src="assets/img/b_body_back_cold.png" alt="" />
+      </div>
+    </div>
+    <!-- B: close on his face as the plea is sung (2.1 - 4.2) -->
+    <div id="s1-b" class="s1-stage">
+      <img class="s1-bg" src="assets/img/bg_cold.jpg" alt="" style="left:-420px" />
+      <div id="s1-face-glow"></div>
+      <div id="s1-face"><img src="assets/img/b_face_soft_cold.png" alt="" /></div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#s1-boy", { xPercent: -50, transformOrigin: "50% 100%" });
+      gsap.set("#s1-face", { transformOrigin: "50% 30%" });
+      // A: slow push toward him, lamp flickers
+      tl.fromTo("#s1-a", { scale: 1.0, x: 0, transformOrigin: "40% 55%" }, { scale: 1.16, x: -30, duration: 2.3, ease: "power1.inOut" }, 0);
+      tl.fromTo("#s1-boy", { y: 0 }, { y: 2, duration: 1.0, ease: "sine.inOut", yoyo: true, repeat: 2 }, 0);
+      tl.fromTo("#s1-lamp-glow", { opacity: 0.8 }, { opacity: 1, duration: 0.18, ease: "none", yoyo: true, repeat: 7 }, 0.2);
+      tl.fromTo("#s1-a", { opacity: 1 }, { opacity: 0, duration: 0.3, ease: "power1.inOut" }, 1.8);
+      // B: dissolve in, push on his face
+      tl.fromTo("#s1-b", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.inOut" }, 1.8);
+      tl.fromTo("#s1-b", { scale: 1.0, transformOrigin: "70% 40%" }, { scale: 1.09, duration: 2.4, ease: "power1.out" }, 1.8);
+      window.__timelines["s1"] = tl;
+    })();
+  </script>
+</template>

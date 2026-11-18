@@ -1,0 +1,37 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #03050a; }
+    .s6-bg { position: absolute; left: -240px; top: -135px; width: 2400px; height: 1350px; }
+    #s6-face { position: absolute; left: 760px; bottom: -60px; width: 1120px; margin-left: -560px; }
+    #s6-face img, #s6-ghost img { display: block; width: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 96%); mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 96%); }
+    #s6-ghost { position: absolute; left: 1470px; bottom: 40px; width: 780px; margin-left: -390px; opacity: 0; mix-blend-mode: screen; }
+    #s6-glow { position: absolute; left: 760px; top: 420px; width: 1200px; height: 1200px; margin: -600px 0 0 -600px;
+      background: radial-gradient(circle, rgba(60,140,190,0.32), rgba(0,0,0,0) 62%); mix-blend-mode: screen; }
+    #s6-dim { position: absolute; inset: 0; background: #02040a; opacity: 0; }
+  </style>
+  <div id="root" data-composition-id="s6" data-width="1920" data-height="1080">
+    <div id="s6-stage" style="position:absolute;inset:0">
+      <img class="s6-bg" src="assets/img/bg_dark.jpg" alt="" />
+      <div id="s6-glow"></div>
+      <div id="s6-face"><img src="assets/img/b_face_neutral_cold.png" alt="" /></div>
+      <div id="s6-ghost"><img src="assets/img/g_face_smile_ghost.png" alt="" /></div>
+    </div>
+    <div id="s6-dim"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#s6-face", { transformOrigin: "50% 35%" });
+      tl.fromTo("#s6-stage", { scale: 1.0, transformOrigin: "40% 40%" }, { scale: 1.1, duration: 5.31, ease: "power1.inOut" }, 0);
+      // "तेरे बिना जीना" (22.35 - 25.5): her face flickers beside him, then is gone on "जीना"
+      tl.fromTo("#s6-ghost", { opacity: 0 }, { opacity: 0.55, duration: 0.5, ease: "power1.out" }, 0.3);
+      tl.fromTo("#s6-ghost", { opacity: 0.55 }, { opacity: 0.2, duration: 0.12, ease: "none", yoyo: true, repeat: 9 }, 1.0);
+      tl.fromTo("#s6-ghost", { opacity: 0.55 }, { opacity: 0, duration: 1.0, ease: "power2.in", immediateRender: false }, 2.2);
+      tl.fromTo("#s6-ghost", { x: 0, scale: 1 }, { x: 40, scale: 0.94, duration: 3.2, ease: "none" }, 0.3);
+      // face sinks into the dark under the title
+      tl.fromTo("#s6-dim", { opacity: 0 }, { opacity: 0.7, duration: 1.6, ease: "power1.in" }, 3.7);
+      window.__timelines["s6"] = tl;
+    })();
+  </script>
+</template>

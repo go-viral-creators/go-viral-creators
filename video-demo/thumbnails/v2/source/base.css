@@ -1,0 +1,13 @@
+@font-face { font-family: "Rozha"; src: url("../fonts/RozhaOne-Regular.ttf"); }
+@font-face { font-family: "Yatra"; src: url("../fonts/YatraOne-Regular.ttf"); }
+@font-face { font-family: "Khand"; src: url("../fonts/Khand-Bold.ttf"); font-weight: 700; }
+@font-face { font-family: "Bebas"; src: url("../fonts/BebasNeue-Regular.ttf"); }
+@font-face { font-family: "Anton"; src: url("../fonts/Anton-Regular.ttf"); }
+* { margin:0; padding:0; box-sizing:border-box; }
+html,body { width:1280px; height:720px; overflow:hidden; background:#000; }
+.stage { position:relative; width:1280px; height:720px; overflow:hidden; }
+.a { position:absolute; }
+.cut { position:absolute; display:block; }
+.grain { position:absolute; inset:0; background:url("img/grain.png"); opacity:.05; mix-blend-mode:overlay; }
+.title { font-family:"Rozha",serif; line-height:1; white-space:nowrap; }
+.singer { font-family:"Bebas",sans-serif; letter-spacing:.42em; white-space:nowrap; }

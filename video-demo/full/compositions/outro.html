@@ -1,0 +1,31 @@
+<template>
+  <style>
+    @font-face { font-family: "Tiro Devanagari Hindi"; src: url("assets/fonts/TiroDevanagariHindi.ttf"); font-weight: 400; }
+    #root { position: absolute; inset: 0; pointer-events: none; }
+    #outro-art { position: absolute; left: 1010px; width: 860px; top: 150px; text-align: center; color: rgba(235,242,255,0.9);
+      font-family: "Inter", sans-serif; font-size: 30px; font-weight: 700; letter-spacing: 0.62em; text-shadow: 0 2px 12px rgba(0,0,0,0.8); }
+    #outro-title { position: absolute; left: 1010px; width: 860px; top: 200px; text-align: center; color: #ffe0b0;
+      font-family: "Tiro Devanagari Hindi", serif; font-size: 156px; line-height: 1.2;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.7), 0 0 44px rgba(255,170,80,0.6), 0 0 120px rgba(255,140,60,0.35); }
+    #outro-line { position: absolute; left: 1440px; top: 412px; width: 220px; height: 2px; margin-left: -110px; background: rgba(255,205,150,0.8); }
+    #outro-sub { position: absolute; left: 1010px; width: 860px; top: 436px; text-align: center; color: rgba(215,228,245,0.85);
+      font-family: "Inter", sans-serif; font-size: 28px; font-weight: 400; letter-spacing: 0.5em; text-shadow: 0 2px 10px rgba(0,0,0,0.8); }
+  </style>
+  <div id="root" data-composition-id="outro" data-width="1920" data-height="1080">
+    <div id="outro-art">BAD DEVIL</div>
+    <div id="outro-title">तेरा इंतज़ार है</div>
+    <div id="outro-line"></div>
+    <div id="outro-sub">MUSIC VIDEO</div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#outro-art", { opacity: 0, scale: 1.12 }, { opacity: 1, scale: 1, duration: 1.2, ease: "power2.out" }, 0.3);
+      tl.fromTo("#outro-title", { opacity: 0, scale: 1.08, filter: "blur(14px)" }, { opacity: 1, scale: 1, filter: "blur(0px)", duration: 1.4, ease: "power3.out" }, 1.2);
+      tl.fromTo("#outro-line", { scaleX: 0 }, { scaleX: 1, duration: 0.8, ease: "power3.out" }, 2.1);
+      tl.fromTo("#outro-sub", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.8, ease: "power2.out" }, 2.4);
+      
+      window.__timelines["outro"] = tl;
+    })();
+  </script>
+</template>

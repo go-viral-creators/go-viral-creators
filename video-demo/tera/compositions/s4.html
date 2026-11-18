@@ -1,0 +1,59 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #050a14; font-family: "Inter", sans-serif; }
+    .s4-bg { position: absolute; left: -300px; top: -135px; width: 2400px; height: 1350px; filter: blur(7px); opacity: 0.75; }
+    #s4-face { position: absolute; left: 1340px; bottom: -80px; width: 1100px; margin-left: -550px; filter: blur(15px); opacity: 0.8; }
+    #s4-face img { display: block; width: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 96%); mask-image: linear-gradient(to bottom, #000 0%, #000 60%, transparent 96%); }
+    #s4-phone { position: absolute; left: 640px; top: 150px; width: 410px; height: 800px; margin-left: -205px; border-radius: 62px;
+      background: linear-gradient(160deg, #0d141f, #070b12); border: 6px solid #1c2736;
+      box-shadow: 0 0 120px 20px rgba(80,170,230,0.28), 0 40px 90px rgba(0,0,0,0.7); overflow: hidden; color: #e8f1fb; }
+    #s4-time { position: absolute; top: 34px; width: 100%; text-align: center; font-size: 28px; font-weight: 700; opacity: 0.8; }
+    #s4-rings { position: absolute; left: 50%; top: 290px; width: 0; height: 0; }
+    .s4-ring { position: absolute; width: 230px; height: 230px; margin: -115px 0 0 -115px; border-radius: 50%; border: 3px solid rgba(120,215,255,0.7); }
+    #s4-avatar { position: absolute; left: 50%; top: 175px; width: 230px; height: 230px; margin-left: -115px; border-radius: 50%; overflow: hidden;
+      background: radial-gradient(circle at 50% 30%, #3b6f86, #14283a); border: 3px solid rgba(160,225,255,0.55); }
+    #s4-avatar img { position: absolute; left: 50%; top: 8px; width: 270px; margin-left: -135px; }
+    #s4-name { position: absolute; top: 450px; width: 100%; text-align: center; font-size: 66px; font-weight: 700; letter-spacing: -0.02em; }
+    .s4-status { position: absolute; top: 540px; width: 100%; text-align: center; font-size: 30px; font-weight: 400; color: #8fb3c9; }
+    #s4-fail { color: #ff6b6b; font-weight: 700; opacity: 0; }
+    .s4-btn { position: absolute; bottom: 70px; width: 104px; height: 104px; border-radius: 50%; }
+    #s4-end { left: 66px; background: #e5484d; } #s4-acc { right: 66px; background: #2fb36b; }
+    .s4-btn::after { content: ""; position: absolute; left: 50%; top: 50%; width: 46px; height: 12px; margin: -6px 0 0 -23px; border-radius: 6px; background: #fff; }
+    #s4-acc::after { width: 12px; height: 46px; margin: -23px 0 0 -6px; }
+  </style>
+  <div id="root" data-composition-id="s4" data-width="1920" data-height="1080">
+    <div id="s4-stage" style="position:absolute;inset:0">
+      <img class="s4-bg" src="assets/img/bg_cold.jpg" alt="" />
+      <div id="s4-face"><img src="assets/img/b_face_soft_cold.png" alt="" /></div>
+      <div id="s4-phone">
+        <div id="s4-time">11:47 PM</div>
+        <div id="s4-rings"><div class="s4-ring" id="s4-r1"></div><div class="s4-ring" id="s4-r2"></div><div class="s4-ring" id="s4-r3"></div></div>
+        <div id="s4-avatar"><img src="assets/img/g_face_smile_warm.png" alt="" /></div>
+        <div id="s4-name">Jaan</div>
+        <div id="s4-calling" class="s4-status">calling…</div>
+        <div id="s4-fail" class="s4-status">No answer</div>
+        <div id="s4-end" class="s4-btn"></div><div id="s4-acc" class="s4-btn"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      gsap.set("#s4-phone", { transformPerspective: 1700, transformOrigin: "50% 50%" });
+      tl.fromTo("#s4-phone", { rotationY: -17, y: 14 }, { rotationY: -7, y: -10, duration: 4.0, ease: "sine.inOut" }, 0);
+      tl.fromTo("#s4-stage", { scale: 1.0, transformOrigin: "50% 50%" }, { scale: 1.07, duration: 4.0, ease: "none" }, 0);
+      tl.fromTo("#s4-face", { x: 0 }, { x: -40, duration: 4.0, ease: "none" }, 0);
+      // ringing: three pulsing rings
+      ["#s4-r1", "#s4-r2", "#s4-r3"].forEach((id, i) =>
+        tl.fromTo(id, { scale: 1, opacity: 0.6 }, { scale: 2.2, opacity: 0, duration: 1.25, ease: "power1.out", repeat: 1 }, 0.15 + i * 0.42));
+      tl.fromTo("#s4-calling", { opacity: 0.45 }, { opacity: 1, duration: 0.5, ease: "sine.inOut", yoyo: true, repeat: 5 }, 0);
+      // 16.9: the call dies in the gap between lines
+      tl.fromTo("#s4-calling", { opacity: 1 }, { opacity: 0, duration: 0.12 }, 3.36);
+      tl.fromTo("#s4-fail", { opacity: 0, y: 8 }, { opacity: 1, y: 0, duration: 0.2, ease: "power2.out" }, 3.4);
+      tl.fromTo("#s4-avatar", { opacity: 1 }, { opacity: 0.55, duration: 0.4 }, 3.4);
+      tl.fromTo("#s4-acc", { opacity: 1 }, { opacity: 0.25, duration: 0.3 }, 3.4);
+      window.__timelines["s4"] = tl;
+    })();
+  </script>
+</template>

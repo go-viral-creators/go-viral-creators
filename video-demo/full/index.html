@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; background: #000; }
+      #base { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="186.744" data-width="1920" data-height="1080">
+      <video id="base" class="clip" src="assets/base.mp4" muted playsinline data-start="0" data-duration="186.744" data-track-index="0"></video>
+      <div id="fx" class="clip" data-composition-id="fx" data-composition-src="compositions/fx.html" data-start="0" data-duration="186.744" data-track-index="1" data-width="1920" data-height="1080" data-track-kind="graphics" style="z-index:5"></div>
+      <div id="intro" class="clip" data-composition-id="intro" data-composition-src="compositions/intro.html" data-start="0" data-duration="7.2" data-track-index="2" data-width="1920" data-height="1080" data-track-kind="graphics" style="z-index:6"></div>
+      <div id="outro" class="clip" data-composition-id="outro" data-composition-src="compositions/outro.html" data-start="179.6" data-duration="7.144" data-track-index="2" data-width="1920" data-height="1080" data-track-kind="graphics" style="z-index:6"></div>
+      <div id="lyrics" class="clip" data-composition-id="lyrics" data-composition-src="compositions/lyrics.html" data-start="0" data-duration="186.744" data-track-index="3" data-width="1920" data-height="1080" data-track-kind="captions" style="z-index:4"></div>
+      <audio id="song" class="clip" src="assets/song.mp3" data-start="0" data-duration="186.744" data-volume="1" data-fade-out="1.2" data-track-index="5"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>

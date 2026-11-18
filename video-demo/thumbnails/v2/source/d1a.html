@@ -1,0 +1,23 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+.L { position:absolute; inset:0; background: radial-gradient(ellipse 70% 90% at 22% 40%, #7a0f1d 0%, #3a0610 45%, #0b0204 100%); clip-path: polygon(0 0,52% 0,47% 30%,54% 52%,46% 74%,51% 100%,0 100%); }
+.R { position:absolute; inset:0; background: radial-gradient(ellipse 70% 90% at 78% 40%, #123a7a 0%, #08183a 45%, #020510 100%); clip-path: polygon(52% 0,100% 0,100% 100%,51% 100%,46% 74%,54% 52%,47% 30%); }
+svg { position:absolute; inset:0; }
+.boy { height: 880px; left: -95px; bottom: -235px;  -webkit-mask-image: linear-gradient(to bottom,#000 80%,transparent 100%); }
+.w-boy { position:absolute; inset:0; filter: drop-shadow(0 0 30px rgba(255,60,60,.35)); }
+.shade { position:absolute; left:0; right:0; bottom:0; height:330px; background: linear-gradient(to top, rgba(0,0,0,.95), rgba(0,0,0,.6) 50%, transparent); }
+.title { left:0; width:100%; bottom: 92px; text-align:center; font-size: 150px; color:#fff;
+  background: linear-gradient(180deg,#fff9e0 0%,#ffd36b 40%,#f08c1c 100%); -webkit-background-clip:text; background-clip:text; -webkit-text-fill-color:transparent;
+  filter: drop-shadow(0 0 2px #000) drop-shadow(0 0 2px #000) drop-shadow(0 8px 0 #3a1200) drop-shadow(0 0 28px rgba(255,140,40,.7)); }
+.singer { left:0; width:100%; bottom: 40px; text-align:center; font-size: 44px; color:#fff; text-shadow: 0 0 18px rgba(255,80,80,.8), 0 3px 0 #000; }
+.gpanel { position:absolute; inset:0; clip-path: polygon(52% 0,100% 0,100% 100%,51% 100%,46% 74%,54% 52%,47% 30%); }
+.gglow { position:absolute; inset:0; filter: drop-shadow(0 0 30px rgba(80,140,255,.45)); }
+.girl { position:absolute; height: 810px; left: 536px; top: 135px; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 60px, #000 440px, transparent 560px); }
+</style></head><body><div class="stage">
+<div class="L"></div><div class="R"></div>
+<svg viewBox="0 0 1280 720"><defs><filter id="g"><feGaussianBlur stdDeviation="6"/></filter></defs>
+<polyline points="666,0 602,216 691,374 589,533 653,720" fill="none" stroke="#ffd9a0" stroke-width="10" filter="url(#g)" opacity=".9"/>
+<polyline points="666,0 602,216 691,374 589,533 653,720" fill="none" stroke="#fff" stroke-width="3"/></svg>
+<div class="w-boy"><img class="cut boy" src="img/boy_cry2.png"></div><div class="gglow"><div class="gpanel"><img class="girl" src="img/girl_coat3.png"></div></div>
+<div class="shade"></div>
+<div class="a title">तेरा इंतज़ार है</div><div class="a singer">BAD DEVIL</div>
+<div class="grain"></div></div></body></html>

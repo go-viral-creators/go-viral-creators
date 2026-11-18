@@ -1,0 +1,68 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; background: #2a120c; }
+    .s2-stage { position: absolute; inset: 0; }
+    .s2-bg { position: absolute; left: -240px; top: -135px; width: 2400px; height: 1350px; }
+    .s2-ch { position: absolute; bottom: 125px; }
+    .s2-ch img { display: block; width: 100%; }
+    .s2-refl { position: absolute; left: 0; top: 100%; transform: scaleY(-1); opacity: 0.16;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, transparent 42%); mask-image: linear-gradient(to bottom, #000 0%, transparent 42%); }
+    #s2-girl { left: 700px; width: 268px; }
+    #s2-boy { left: 1180px; width: 436px; }
+    #s2-warm { position: absolute; left: 960px; top: 540px; width: 1500px; height: 1500px; margin: -750px 0 0 -750px;
+      background: radial-gradient(circle, rgba(255,170,80,0.5), rgba(255,120,60,0) 62%); mix-blend-mode: screen; }
+    .s2-dust { position: absolute; border-radius: 50%; background: radial-gradient(circle, rgba(255,230,180,0.95), rgba(255,200,120,0)); }
+    #s2-flare { position: absolute; inset: 0; background: radial-gradient(ellipse 60% 80% at 80% 40%, #fff3d8, rgba(255,190,110,0.6) 45%, rgba(255,160,80,0) 80%); mix-blend-mode: screen; opacity: 0; }
+    #s2-face { position: absolute; left: 1060px; bottom: -50px; width: 1000px; }
+    #s2-face img { display: block; width: 100%;
+      -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 96%); mask-image: linear-gradient(to bottom, #000 0%, #000 62%, transparent 96%); }
+  </style>
+  <div id="root" data-composition-id="s2" data-width="1920" data-height="1080">
+    <div id="s2-stage" class="s2-stage">
+      <img class="s2-bg" src="assets/img/bg_warm.jpg" alt="" />
+      <div id="s2-warm"></div>
+      <div id="s2-dust" data-layout-allow-overflow></div>
+      <div id="s2-wide" style="position:absolute;inset:0">
+        <div id="s2-girl" class="s2-ch">
+          <img src="assets/img/g_body_front_warm.png" alt="" />
+          <img class="s2-refl" src="assets/img/g_body_front_warm.png" alt="" />
+        </div>
+        <div id="s2-boy" class="s2-ch">
+          <img src="assets/img/b_body_side_warm.png" alt="" />
+          <img class="s2-refl" src="assets/img/b_body_side_warm.png" alt="" />
+        </div>
+      </div>
+      <div id="s2-face"><img src="assets/img/g_face_smile_warm.png" alt="" /></div>
+    </div>
+    <div id="s2-flare"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      let s = 77; const rnd = () => { s = (s * 16807) % 2147483647; return s / 2147483647; };
+      const box = document.getElementById("s2-dust");
+      for (let i = 0; i < 26; i++) {
+        const d = document.createElement("div"); d.className = "s2-dust";
+        const sz = 6 + rnd() * 26; d.style.cssText = `width:${sz}px;height:${sz}px;left:${rnd() * 1900}px;top:${380 + rnd() * 600}px;opacity:${(0.2 + rnd() * 0.6).toFixed(2)}`;
+        box.appendChild(d);
+        tl.fromTo(d, { y: 0, x: 0 }, { y: -(120 + rnd() * 220), x: (rnd() - 0.5) * 120, duration: 5.4, ease: "sine.inOut" }, 0);
+      }
+      gsap.set("#s2-girl", { xPercent: -50, transformOrigin: "50% 100%" });
+      gsap.set("#s2-boy", { xPercent: -50, transformOrigin: "50% 100%" });
+      gsap.set("#s2-face", { transformOrigin: "50% 30%", xPercent: -50 });
+      // enter: dissolve in with a light flare (cut at 4.2 => local 0.3)
+      tl.fromTo("#root", { opacity: 0 }, { opacity: 1, duration: 0.3, ease: "power1.out" }, 0);
+      tl.fromTo("#s2-flare", { opacity: 0.95 }, { opacity: 0, duration: 0.8, ease: "power2.out" }, 0.15);
+      // wide: slow push, they lean a hair toward each other
+      tl.fromTo("#s2-wide", { scale: 1.0, transformOrigin: "50% 50%" }, { scale: 1.07, duration: 2.7, ease: "power1.inOut" }, 0);
+      tl.fromTo("#s2-girl", { x: 0 }, { x: 22, duration: 2.7, ease: "sine.inOut" }, 0);
+      tl.fromTo("#s2-boy", { x: 0 }, { x: -22, duration: 2.7, ease: "sine.inOut" }, 0);
+      tl.fromTo("#s2-warm", { opacity: 0.8 }, { opacity: 1, duration: 1.2, ease: "sine.inOut", yoyo: true, repeat: 3 }, 0);
+      // close on her smile at 6.6 (local 2.7) as "है क्या पता" is sung
+      tl.fromTo("#s2-wide", { opacity: 1 }, { opacity: 0, duration: 0.4, ease: "power1.inOut" }, 2.7);
+      tl.fromTo("#s2-face", { opacity: 0, scale: 1.03 }, { opacity: 1, scale: 1.03, duration: 0.4, ease: "power1.inOut" }, 2.7);
+      tl.fromTo("#s2-face", { scale: 1.03 }, { scale: 1.12, duration: 2.7, ease: "power1.out", immediateRender: false }, 2.7);
+      window.__timelines["s2"] = tl;
+    })();
+  </script>
+</template>
