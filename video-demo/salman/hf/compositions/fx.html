@@ -1,0 +1,217 @@
+<template>
+  <style>
+    #root { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    #grain { position: absolute; inset: -320px; opacity: .045; background: url("assets/img/noise.png"); background-size: 512px 512px; }
+    #vig { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 78% at 50% 50%, rgba(0,0,0,0) 60%, rgba(0,0,0,.42) 100%); }
+    #shadeB { position: absolute; left:0; right:0; bottom:0; height: 260px; background: linear-gradient(to top, rgba(0,0,0,.42), rgba(0,0,0,0)); }
+    #shadeT { position: absolute; left:0; right:0; top:0; height: 220px; background: linear-gradient(to bottom, rgba(0,0,0,.38), rgba(0,0,0,0)); opacity: 0; }
+    #flashP { position: absolute; inset: 0; background: radial-gradient(ellipse 70% 70% at 50% 40%, #ffd0ec, rgba(255,80,170,.65) 55%, rgba(120,0,90,.2)); opacity: 0; mix-blend-mode: screen; }
+    #flashW { position: absolute; inset: 0; background: #fff8e6; opacity: 0; }
+    #black { position: absolute; inset: 0; background: #000; opacity: 1; }
+    .heart { position: absolute; bottom: -80px; font-size: 54px; opacity: 0; text-shadow: 0 0 18px currentColor; }
+    .cf { position: absolute; border-radius: 2px; }
+  </style>
+  <div id="root" data-composition-id="fx" data-width="1920" data-height="1080">
+    <div id="shadeB"></div><div id="shadeT"></div>
+    <div class="heart" data-layout-ignore id="h0" style="left:876px;transform:scale(1.20);color:#ff3d7f">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h1" style="left:875px;transform:scale(1.47);color:#ff3d7f">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h2" style="left:1189px;transform:scale(1.41);color:#ffd1e6">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h3" style="left:330px;transform:scale(1.18);color:#ff5fa8">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h4" style="left:1128px;transform:scale(1.06);color:#ff8fc5">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h5" style="left:1177px;transform:scale(1.45);color:#ff5fa8">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h6" style="left:415px;transform:scale(0.92);color:#ff3d7f">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h7" style="left:654px;transform:scale(1.23);color:#ff8fc5">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h8" style="left:1207px;transform:scale(1.15);color:#ff3d7f">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h9" style="left:1232px;transform:scale(1.07);color:#ff5fa8">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h10" style="left:1326px;transform:scale(0.98);color:#ffd1e6">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h11" style="left:132px;transform:scale(1.21);color:#ff5fa8">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h12" style="left:1570px;transform:scale(1.05);color:#ff5fa8">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h13" style="left:456px;transform:scale(1.53);color:#ff3d7f">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h14" style="left:1805px;transform:scale(1.06);color:#ff8fc5">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h15" style="left:1450px;transform:scale(0.94);color:#ffd1e6">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h16" style="left:107px;transform:scale(1.07);color:#ff8fc5">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h17" style="left:514px;transform:scale(0.79);color:#ff3d7f">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h18" style="left:393px;transform:scale(1.20);color:#ff8fc5">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h19" style="left:1814px;transform:scale(1.39);color:#ff3d7f">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h20" style="left:285px;transform:scale(1.08);color:#ffd1e6">&#10084;</div>
+    <div class="heart" data-layout-ignore id="h21" style="left:1601px;transform:scale(1.58);color:#ff5fa8">&#10084;</div>
+    <div class="cf" id="c0" style="left:405px;top:-190px;width:10px;height:5px;background:#ff8a3d"></div>
+    <div class="cf" id="c1" style="left:281px;top:-176px;width:13px;height:6px;background:#ffffff"></div>
+    <div class="cf" id="c2" style="left:141px;top:-275px;width:14px;height:6px;background:#ff4f9a"></div>
+    <div class="cf" id="c3" style="left:1195px;top:-264px;width:14px;height:6px;background:#ffffff"></div>
+    <div class="cf" id="c4" style="left:1204px;top:-213px;width:12px;height:5px;background:#ffffff"></div>
+    <div class="cf" id="c5" style="left:1420px;top:-37px;width:16px;height:7px;background:#7dff6b"></div>
+    <div class="cf" id="c6" style="left:809px;top:-271px;width:17px;height:8px;background:#3fd0ff"></div>
+    <div class="cf" id="c7" style="left:493px;top:-69px;width:19px;height:9px;background:#3fd0ff"></div>
+    <div class="cf" id="c8" style="left:1876px;top:-265px;width:16px;height:7px;background:#ff8a3d"></div>
+    <div class="cf" id="c9" style="left:538px;top:-43px;width:14px;height:6px;background:#ffd23f"></div>
+    <div class="cf" id="c10" style="left:478px;top:-287px;width:11px;height:5px;background:#ffffff"></div>
+    <div class="cf" id="c11" style="left:695px;top:-51px;width:15px;height:7px;background:#ff8a3d"></div>
+    <div class="cf" id="c12" style="left:1818px;top:-135px;width:17px;height:8px;background:#7dff6b"></div>
+    <div class="cf" id="c13" style="left:1849px;top:-294px;width:13px;height:6px;background:#7dff6b"></div>
+    <div class="cf" id="c14" style="left:262px;top:-280px;width:19px;height:9px;background:#3fd0ff"></div>
+    <div class="cf" id="c15" style="left:1415px;top:-103px;width:17px;height:8px;background:#3fd0ff"></div>
+    <div class="cf" id="c16" style="left:1730px;top:-56px;width:16px;height:7px;background:#ffd23f"></div>
+    <div class="cf" id="c17" style="left:1200px;top:-193px;width:11px;height:5px;background:#ffffff"></div>
+    <div class="cf" id="c18" style="left:222px;top:-228px;width:17px;height:8px;background:#3fd0ff"></div>
+    <div class="cf" id="c19" style="left:1115px;top:-177px;width:15px;height:7px;background:#ffd23f"></div>
+    <div class="cf" id="c20" style="left:596px;top:-275px;width:18px;height:8px;background:#ff8a3d"></div>
+    <div class="cf" id="c21" style="left:1267px;top:-164px;width:17px;height:8px;background:#3fd0ff"></div>
+    <div class="cf" id="c22" style="left:389px;top:-253px;width:15px;height:7px;background:#ff8a3d"></div>
+    <div class="cf" id="c23" style="left:464px;top:-187px;width:18px;height:8px;background:#ff8a3d"></div>
+    <div class="cf" id="c24" style="left:1755px;top:-54px;width:12px;height:5px;background:#ffffff"></div>
+    <div class="cf" id="c25" style="left:258px;top:-202px;width:20px;height:9px;background:#ffd23f"></div>
+    <div class="cf" id="c26" style="left:531px;top:-253px;width:18px;height:8px;background:#3fd0ff"></div>
+    <div class="cf" id="c27" style="left:734px;top:-154px;width:20px;height:9px;background:#ff8a3d"></div>
+    <div class="cf" id="c28" style="left:869px;top:-279px;width:17px;height:8px;background:#ffffff"></div>
+    <div class="cf" id="c29" style="left:1096px;top:-213px;width:14px;height:6px;background:#ffd23f"></div>
+    <div class="cf" id="c30" style="left:365px;top:-85px;width:20px;height:9px;background:#ff4f9a"></div>
+    <div class="cf" id="c31" style="left:221px;top:-269px;width:20px;height:9px;background:#ff8a3d"></div>
+    <div class="cf" id="c32" style="left:1314px;top:-244px;width:18px;height:8px;background:#ff4f9a"></div>
+    <div class="cf" id="c33" style="left:1027px;top:-290px;width:19px;height:9px;background:#3fd0ff"></div>
+    <div class="cf" id="c34" style="left:961px;top:-21px;width:11px;height:5px;background:#ff8a3d"></div>
+    <div class="cf" id="c35" style="left:1791px;top:-98px;width:19px;height:8px;background:#7dff6b"></div>
+    <div class="cf" id="c36" style="left:13px;top:-146px;width:19px;height:9px;background:#ffffff"></div>
+    <div class="cf" id="c37" style="left:890px;top:-118px;width:18px;height:8px;background:#ff8a3d"></div>
+    <div class="cf" id="c38" style="left:1775px;top:-265px;width:20px;height:9px;background:#7dff6b"></div>
+    <div class="cf" id="c39" style="left:1031px;top:-79px;width:13px;height:6px;background:#ff8a3d"></div>
+    <div class="cf" id="c40" style="left:159px;top:-177px;width:10px;height:5px;background:#3fd0ff"></div>
+    <div class="cf" id="c41" style="left:1554px;top:-282px;width:17px;height:8px;background:#ff4f9a"></div>
+    <div class="cf" id="c42" style="left:1759px;top:-168px;width:17px;height:8px;background:#ff8a3d"></div>
+    <div class="cf" id="c43" style="left:845px;top:-54px;width:12px;height:5px;background:#ff8a3d"></div>
+    <div class="cf" id="c44" style="left:1011px;top:-219px;width:15px;height:7px;background:#ff8a3d"></div>
+    <div class="cf" id="c45" style="left:1742px;top:-228px;width:19px;height:8px;background:#ffffff"></div>
+    <div class="cf" id="c46" style="left:1859px;top:-153px;width:11px;height:5px;background:#ff4f9a"></div>
+    <div class="cf" id="c47" style="left:9px;top:-194px;width:14px;height:6px;background:#ffd23f"></div>
+    <div class="cf" id="c48" style="left:1538px;top:-142px;width:19px;height:9px;background:#ff8a3d"></div>
+    <div class="cf" id="c49" style="left:881px;top:-42px;width:15px;height:7px;background:#7dff6b"></div>
+    <div class="cf" id="c50" style="left:244px;top:-179px;width:11px;height:5px;background:#7dff6b"></div>
+    <div class="cf" id="c51" style="left:806px;top:-292px;width:10px;height:5px;background:#ff8a3d"></div>
+    <div class="cf" id="c52" style="left:373px;top:-236px;width:12px;height:6px;background:#3fd0ff"></div>
+    <div class="cf" id="c53" style="left:958px;top:-160px;width:17px;height:8px;background:#ffffff"></div>
+    <div class="cf" id="c54" style="left:1347px;top:-54px;width:15px;height:7px;background:#ff8a3d"></div>
+    <div class="cf" id="c55" style="left:307px;top:-243px;width:12px;height:5px;background:#ff8a3d"></div>
+    <div class="cf" id="c56" style="left:1042px;top:-136px;width:13px;height:6px;background:#ff8a3d"></div>
+    <div class="cf" id="c57" style="left:348px;top:-131px;width:20px;height:9px;background:#ff4f9a"></div>
+    <div class="cf" id="c58" style="left:1704px;top:-262px;width:14px;height:6px;background:#ff8a3d"></div>
+    <div class="cf" id="c59" style="left:835px;top:-36px;width:14px;height:6px;background:#ff8a3d"></div>
+    <div class="cf" id="c60" style="left:1316px;top:-295px;width:18px;height:8px;background:#ff8a3d"></div>
+    <div class="cf" id="c61" style="left:694px;top:-103px;width:17px;height:8px;background:#3fd0ff"></div>
+    <div class="cf" id="c62" style="left:363px;top:-280px;width:16px;height:7px;background:#ffd23f"></div>
+    <div class="cf" id="c63" style="left:1738px;top:-165px;width:18px;height:8px;background:#ffd23f"></div>
+    <div class="cf" id="c64" style="left:1901px;top:-40px;width:17px;height:8px;background:#ffd23f"></div>
+    <div class="cf" id="c65" style="left:149px;top:-273px;width:14px;height:6px;background:#7dff6b"></div>
+    <div class="cf" id="c66" style="left:1154px;top:-296px;width:15px;height:7px;background:#ff4f9a"></div>
+    <div class="cf" id="c67" style="left:1420px;top:-187px;width:18px;height:8px;background:#ff4f9a"></div>
+    <div class="cf" id="c68" style="left:621px;top:-276px;width:16px;height:7px;background:#ff8a3d"></div>
+    <div class="cf" id="c69" style="left:367px;top:-136px;width:11px;height:5px;background:#3fd0ff"></div>
+    <div id="grain"></div><div id="vig"></div>
+    <div id="flashP"></div><div id="flashW"></div><div id="black"></div>
+  </div>
+  <script>
+    (function () {
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#grain",{x:0,y:0},{x:-293,y:-187,duration:155.4,ease:"steps(1864)"},0);
+      tl.fromTo("#black",{opacity:1},{opacity:0,duration:1.6,ease:"power1.out"},0);
+      tl.fromTo("#black",{opacity:0},{opacity:1,duration:1.8,ease:"power1.in",immediateRender:false},153.55);
+      // top shade only while lyrics sit at the top
+      [[2.4,6.1],[52.4,57.7],[136.2,146.8]].forEach(([a,b])=>{ tl.fromTo("#shadeT",{opacity:0},{opacity:1,duration:0.3,immediateRender:false},a); tl.fromTo("#shadeT",{opacity:1},{opacity:0,duration:0.3,immediateRender:false},b); });
+      // rap entry pink flash and chorus white flash
+      tl.fromTo("#flashP",{opacity:0},{opacity:0.85,duration:0.06,immediateRender:false},57.76); tl.fromTo("#flashP",{opacity:0.85},{opacity:0,duration:0.5,immediateRender:false},57.82);
+      tl.fromTo("#flashW",{opacity:0},{opacity:0.8,duration:0.05,immediateRender:false},131.0); tl.fromTo("#flashW",{opacity:0.8},{opacity:0,duration:0.45,immediateRender:false},131.05);
+      tl.fromTo("#h0",{y:0},{y:-760,duration:3.4,ease:"power1.out"},50.93); tl.fromTo("#h0",{opacity:0},{opacity:1,duration:0.5},50.93); tl.fromTo("#h0",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},53.53);
+      tl.fromTo("#h1",{y:0},{y:-760,duration:3.4,ease:"power1.out"},48.28); tl.fromTo("#h1",{opacity:0},{opacity:1,duration:0.5},48.28); tl.fromTo("#h1",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.88);
+      tl.fromTo("#h2",{y:0},{y:-760,duration:3.4,ease:"power1.out"},47.94); tl.fromTo("#h2",{opacity:0},{opacity:1,duration:0.5},47.94); tl.fromTo("#h2",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.54);
+      tl.fromTo("#h3",{y:0},{y:-760,duration:3.4,ease:"power1.out"},50.81); tl.fromTo("#h3",{opacity:0},{opacity:1,duration:0.5},50.81); tl.fromTo("#h3",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},53.41);
+      tl.fromTo("#h4",{y:0},{y:-760,duration:3.4,ease:"power1.out"},49.23); tl.fromTo("#h4",{opacity:0},{opacity:1,duration:0.5},49.23); tl.fromTo("#h4",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},51.83);
+      tl.fromTo("#h5",{y:0},{y:-760,duration:3.4,ease:"power1.out"},47.83); tl.fromTo("#h5",{opacity:0},{opacity:1,duration:0.5},47.83); tl.fromTo("#h5",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.43);
+      tl.fromTo("#h6",{y:0},{y:-760,duration:3.4,ease:"power1.out"},47.71); tl.fromTo("#h6",{opacity:0},{opacity:1,duration:0.5},47.71); tl.fromTo("#h6",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.31);
+      tl.fromTo("#h7",{y:0},{y:-760,duration:3.4,ease:"power1.out"},48.30); tl.fromTo("#h7",{opacity:0},{opacity:1,duration:0.5},48.30); tl.fromTo("#h7",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.90);
+      tl.fromTo("#h8",{y:0},{y:-760,duration:3.4,ease:"power1.out"},49.98); tl.fromTo("#h8",{opacity:0},{opacity:1,duration:0.5},49.98); tl.fromTo("#h8",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},52.58);
+      tl.fromTo("#h9",{y:0},{y:-760,duration:3.4,ease:"power1.out"},49.58); tl.fromTo("#h9",{opacity:0},{opacity:1,duration:0.5},49.58); tl.fromTo("#h9",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},52.18);
+      tl.fromTo("#h10",{y:0},{y:-760,duration:3.4,ease:"power1.out"},48.43); tl.fromTo("#h10",{opacity:0},{opacity:1,duration:0.5},48.43); tl.fromTo("#h10",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},51.03);
+      tl.fromTo("#h11",{y:0},{y:-760,duration:3.4,ease:"power1.out"},47.99); tl.fromTo("#h11",{opacity:0},{opacity:1,duration:0.5},47.99); tl.fromTo("#h11",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.59);
+      tl.fromTo("#h12",{y:0},{y:-760,duration:3.4,ease:"power1.out"},51.05); tl.fromTo("#h12",{opacity:0},{opacity:1,duration:0.5},51.05); tl.fromTo("#h12",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},53.65);
+      tl.fromTo("#h13",{y:0},{y:-760,duration:3.4,ease:"power1.out"},47.79); tl.fromTo("#h13",{opacity:0},{opacity:1,duration:0.5},47.79); tl.fromTo("#h13",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.39);
+      tl.fromTo("#h14",{y:0},{y:-760,duration:3.4,ease:"power1.out"},47.86); tl.fromTo("#h14",{opacity:0},{opacity:1,duration:0.5},47.86); tl.fromTo("#h14",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.46);
+      tl.fromTo("#h15",{y:0},{y:-760,duration:3.4,ease:"power1.out"},47.91); tl.fromTo("#h15",{opacity:0},{opacity:1,duration:0.5},47.91); tl.fromTo("#h15",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.51);
+      tl.fromTo("#h16",{y:0},{y:-760,duration:3.4,ease:"power1.out"},50.92); tl.fromTo("#h16",{opacity:0},{opacity:1,duration:0.5},50.92); tl.fromTo("#h16",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},53.52);
+      tl.fromTo("#h17",{y:0},{y:-760,duration:3.4,ease:"power1.out"},47.82); tl.fromTo("#h17",{opacity:0},{opacity:1,duration:0.5},47.82); tl.fromTo("#h17",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.42);
+      tl.fromTo("#h18",{y:0},{y:-760,duration:3.4,ease:"power1.out"},49.21); tl.fromTo("#h18",{opacity:0},{opacity:1,duration:0.5},49.21); tl.fromTo("#h18",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},51.81);
+      tl.fromTo("#h19",{y:0},{y:-760,duration:3.4,ease:"power1.out"},49.11); tl.fromTo("#h19",{opacity:0},{opacity:1,duration:0.5},49.11); tl.fromTo("#h19",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},51.71);
+      tl.fromTo("#h20",{y:0},{y:-760,duration:3.4,ease:"power1.out"},48.37); tl.fromTo("#h20",{opacity:0},{opacity:1,duration:0.5},48.37); tl.fromTo("#h20",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},50.97);
+      tl.fromTo("#h21",{y:0},{y:-760,duration:3.4,ease:"power1.out"},49.73); tl.fromTo("#h21",{opacity:0},{opacity:1,duration:0.5},49.73); tl.fromTo("#h21",{opacity:1},{opacity:0,duration:0.8,immediateRender:false},52.33);
+      tl.fromTo("#c0",{y:0,rotation:0,opacity:1},{y:1523,x:-109,rotation:83,duration:4.32,ease:"power1.in"},132.03);
+      tl.fromTo("#c1",{y:0,rotation:0,opacity:1},{y:1340,x:-54,rotation:-185,duration:3.85,ease:"power1.in"},131.01);
+      tl.fromTo("#c2",{y:0,rotation:0,opacity:1},{y:1411,x:-22,rotation:-523,duration:3.42,ease:"power1.in"},131.70);
+      tl.fromTo("#c3",{y:0,rotation:0,opacity:1},{y:1362,x:-101,rotation:-393,duration:4.16,ease:"power1.in"},131.70);
+      tl.fromTo("#c4",{y:0,rotation:0,opacity:1},{y:1391,x:-128,rotation:-271,duration:4.27,ease:"power1.in"},131.27);
+      tl.fromTo("#c5",{y:0,rotation:0,opacity:1},{y:1597,x:129,rotation:413,duration:3.26,ease:"power1.in"},131.24);
+      tl.fromTo("#c6",{y:0,rotation:0,opacity:1},{y:1382,x:148,rotation:-283,duration:3.56,ease:"power1.in"},131.05);
+      tl.fromTo("#c7",{y:0,rotation:0,opacity:1},{y:1365,x:-30,rotation:22,duration:3.42,ease:"power1.in"},131.72);
+      tl.fromTo("#c8",{y:0,rotation:0,opacity:1},{y:1323,x:5,rotation:381,duration:3.80,ease:"power1.in"},131.58);
+      tl.fromTo("#c9",{y:0,rotation:0,opacity:1},{y:1364,x:-122,rotation:-465,duration:3.67,ease:"power1.in"},131.24);
+      tl.fromTo("#c10",{y:0,rotation:0,opacity:1},{y:1472,x:-123,rotation:78,duration:3.33,ease:"power1.in"},131.34);
+      tl.fromTo("#c11",{y:0,rotation:0,opacity:1},{y:1371,x:-18,rotation:252,duration:3.81,ease:"power1.in"},132.18);
+      tl.fromTo("#c12",{y:0,rotation:0,opacity:1},{y:1528,x:47,rotation:443,duration:3.21,ease:"power1.in"},132.11);
+      tl.fromTo("#c13",{y:0,rotation:0,opacity:1},{y:1378,x:-72,rotation:-467,duration:3.61,ease:"power1.in"},131.76);
+      tl.fromTo("#c14",{y:0,rotation:0,opacity:1},{y:1462,x:-27,rotation:256,duration:3.82,ease:"power1.in"},131.54);
+      tl.fromTo("#c15",{y:0,rotation:0,opacity:1},{y:1554,x:-128,rotation:-160,duration:3.73,ease:"power1.in"},131.95);
+      tl.fromTo("#c16",{y:0,rotation:0,opacity:1},{y:1493,x:16,rotation:393,duration:4.00,ease:"power1.in"},131.50);
+      tl.fromTo("#c17",{y:0,rotation:0,opacity:1},{y:1587,x:-36,rotation:-462,duration:4.33,ease:"power1.in"},131.70);
+      tl.fromTo("#c18",{y:0,rotation:0,opacity:1},{y:1416,x:150,rotation:-120,duration:4.23,ease:"power1.in"},131.50);
+      tl.fromTo("#c19",{y:0,rotation:0,opacity:1},{y:1463,x:31,rotation:20,duration:3.72,ease:"power1.in"},132.01);
+      tl.fromTo("#c20",{y:0,rotation:0,opacity:1},{y:1448,x:-69,rotation:-418,duration:3.68,ease:"power1.in"},131.03);
+      tl.fromTo("#c21",{y:0,rotation:0,opacity:1},{y:1394,x:10,rotation:-215,duration:3.78,ease:"power1.in"},132.08);
+      tl.fromTo("#c22",{y:0,rotation:0,opacity:1},{y:1381,x:137,rotation:465,duration:4.00,ease:"power1.in"},132.09);
+      tl.fromTo("#c23",{y:0,rotation:0,opacity:1},{y:1524,x:-151,rotation:-75,duration:4.13,ease:"power1.in"},131.30);
+      tl.fromTo("#c24",{y:0,rotation:0,opacity:1},{y:1476,x:43,rotation:454,duration:3.69,ease:"power1.in"},131.46);
+      tl.fromTo("#c25",{y:0,rotation:0,opacity:1},{y:1505,x:-143,rotation:228,duration:3.58,ease:"power1.in"},132.07);
+      tl.fromTo("#c26",{y:0,rotation:0,opacity:1},{y:1419,x:26,rotation:460,duration:4.07,ease:"power1.in"},131.54);
+      tl.fromTo("#c27",{y:0,rotation:0,opacity:1},{y:1396,x:95,rotation:366,duration:3.47,ease:"power1.in"},131.81);
+      tl.fromTo("#c28",{y:0,rotation:0,opacity:1},{y:1516,x:-80,rotation:-495,duration:4.11,ease:"power1.in"},131.04);
+      tl.fromTo("#c29",{y:0,rotation:0,opacity:1},{y:1314,x:-128,rotation:152,duration:4.17,ease:"power1.in"},131.95);
+      tl.fromTo("#c30",{y:0,rotation:0,opacity:1},{y:1573,x:-114,rotation:321,duration:4.35,ease:"power1.in"},131.32);
+      tl.fromTo("#c31",{y:0,rotation:0,opacity:1},{y:1374,x:66,rotation:332,duration:3.26,ease:"power1.in"},131.64);
+      tl.fromTo("#c32",{y:0,rotation:0,opacity:1},{y:1425,x:-122,rotation:231,duration:4.23,ease:"power1.in"},131.57);
+      tl.fromTo("#c33",{y:0,rotation:0,opacity:1},{y:1407,x:-110,rotation:43,duration:3.64,ease:"power1.in"},131.27);
+      tl.fromTo("#c34",{y:0,rotation:0,opacity:1},{y:1342,x:-27,rotation:439,duration:3.92,ease:"power1.in"},131.19);
+      tl.fromTo("#c35",{y:0,rotation:0,opacity:1},{y:1492,x:58,rotation:-327,duration:3.64,ease:"power1.in"},131.16);
+      tl.fromTo("#c36",{y:0,rotation:0,opacity:1},{y:1523,x:101,rotation:321,duration:3.36,ease:"power1.in"},131.78);
+      tl.fromTo("#c37",{y:0,rotation:0,opacity:1},{y:1387,x:-119,rotation:395,duration:3.78,ease:"power1.in"},131.25);
+      tl.fromTo("#c38",{y:0,rotation:0,opacity:1},{y:1451,x:-61,rotation:519,duration:3.81,ease:"power1.in"},131.29);
+      tl.fromTo("#c39",{y:0,rotation:0,opacity:1},{y:1554,x:-72,rotation:384,duration:3.93,ease:"power1.in"},131.38);
+      tl.fromTo("#c40",{y:0,rotation:0,opacity:1},{y:1518,x:64,rotation:-14,duration:3.43,ease:"power1.in"},131.66);
+      tl.fromTo("#c41",{y:0,rotation:0,opacity:1},{y:1384,x:-83,rotation:36,duration:4.34,ease:"power1.in"},131.96);
+      tl.fromTo("#c42",{y:0,rotation:0,opacity:1},{y:1451,x:49,rotation:20,duration:3.44,ease:"power1.in"},132.20);
+      tl.fromTo("#c43",{y:0,rotation:0,opacity:1},{y:1505,x:41,rotation:-447,duration:3.21,ease:"power1.in"},131.69);
+      tl.fromTo("#c44",{y:0,rotation:0,opacity:1},{y:1378,x:-151,rotation:-363,duration:3.25,ease:"power1.in"},131.87);
+      tl.fromTo("#c45",{y:0,rotation:0,opacity:1},{y:1367,x:-71,rotation:-315,duration:4.11,ease:"power1.in"},131.81);
+      tl.fromTo("#c46",{y:0,rotation:0,opacity:1},{y:1574,x:-109,rotation:-96,duration:3.48,ease:"power1.in"},131.69);
+      tl.fromTo("#c47",{y:0,rotation:0,opacity:1},{y:1594,x:-5,rotation:17,duration:3.62,ease:"power1.in"},131.65);
+      tl.fromTo("#c48",{y:0,rotation:0,opacity:1},{y:1401,x:-2,rotation:-360,duration:3.36,ease:"power1.in"},131.59);
+      tl.fromTo("#c49",{y:0,rotation:0,opacity:1},{y:1561,x:97,rotation:-249,duration:3.74,ease:"power1.in"},131.96);
+      tl.fromTo("#c50",{y:0,rotation:0,opacity:1},{y:1547,x:108,rotation:27,duration:4.12,ease:"power1.in"},131.98);
+      tl.fromTo("#c51",{y:0,rotation:0,opacity:1},{y:1433,x:79,rotation:302,duration:3.67,ease:"power1.in"},131.31);
+      tl.fromTo("#c52",{y:0,rotation:0,opacity:1},{y:1345,x:-111,rotation:241,duration:4.20,ease:"power1.in"},131.82);
+      tl.fromTo("#c53",{y:0,rotation:0,opacity:1},{y:1479,x:-67,rotation:133,duration:4.11,ease:"power1.in"},131.70);
+      tl.fromTo("#c54",{y:0,rotation:0,opacity:1},{y:1548,x:-101,rotation:-94,duration:3.98,ease:"power1.in"},131.03);
+      tl.fromTo("#c55",{y:0,rotation:0,opacity:1},{y:1474,x:-12,rotation:-304,duration:3.59,ease:"power1.in"},131.76);
+      tl.fromTo("#c56",{y:0,rotation:0,opacity:1},{y:1463,x:-22,rotation:138,duration:3.88,ease:"power1.in"},131.16);
+      tl.fromTo("#c57",{y:0,rotation:0,opacity:1},{y:1545,x:-12,rotation:-304,duration:4.19,ease:"power1.in"},132.07);
+      tl.fromTo("#c58",{y:0,rotation:0,opacity:1},{y:1303,x:-61,rotation:-445,duration:4.29,ease:"power1.in"},131.29);
+      tl.fromTo("#c59",{y:0,rotation:0,opacity:1},{y:1481,x:62,rotation:-404,duration:3.79,ease:"power1.in"},131.65);
+      tl.fromTo("#c60",{y:0,rotation:0,opacity:1},{y:1529,x:-55,rotation:-154,duration:4.26,ease:"power1.in"},131.24);
+      tl.fromTo("#c61",{y:0,rotation:0,opacity:1},{y:1366,x:50,rotation:3,duration:3.59,ease:"power1.in"},131.76);
+      tl.fromTo("#c62",{y:0,rotation:0,opacity:1},{y:1572,x:-57,rotation:283,duration:3.73,ease:"power1.in"},131.13);
+      tl.fromTo("#c63",{y:0,rotation:0,opacity:1},{y:1478,x:129,rotation:-320,duration:4.02,ease:"power1.in"},131.23);
+      tl.fromTo("#c64",{y:0,rotation:0,opacity:1},{y:1384,x:10,rotation:-395,duration:4.39,ease:"power1.in"},131.11);
+      tl.fromTo("#c65",{y:0,rotation:0,opacity:1},{y:1437,x:-89,rotation:17,duration:4.36,ease:"power1.in"},131.47);
+      tl.fromTo("#c66",{y:0,rotation:0,opacity:1},{y:1519,x:5,rotation:-344,duration:3.30,ease:"power1.in"},131.84);
+      tl.fromTo("#c67",{y:0,rotation:0,opacity:1},{y:1549,x:-152,rotation:-438,duration:4.01,ease:"power1.in"},131.23);
+      tl.fromTo("#c68",{y:0,rotation:0,opacity:1},{y:1475,x:95,rotation:475,duration:4.09,ease:"power1.in"},132.01);
+      tl.fromTo("#c69",{y:0,rotation:0,opacity:1},{y:1410,x:-35,rotation:-238,duration:3.39,ease:"power1.in"},131.41);
+      window.__timelines["fx"] = tl;
+    })();
+  </script>
+</template>

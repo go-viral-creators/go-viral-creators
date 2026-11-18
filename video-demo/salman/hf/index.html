@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="hi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1920, height=1080" />
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+    <style>
+      * { margin: 0; padding: 0; box-sizing: border-box; }
+      html, body { margin: 0; width: 1920px; height: 1080px; overflow: hidden; background: #000; }
+      #root { position: relative; width: 100%; height: 100%; background: #000; overflow: hidden; }
+      #base { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+    </style>
+  </head>
+  <body>
+    <div id="root" data-composition-id="main" data-start="0" data-duration="155.4" data-width="1920" data-height="1080">
+      <video id="base" class="clip" src="assets/base.mp4" muted playsinline data-start="0" data-duration="155.4" data-track-index="0"></video>
+      <div id="lyrics" class="clip" data-composition-id="lyrics" data-composition-src="compositions/lyrics.html" data-start="0" data-duration="155.4" data-track-index="3" data-width="1920" data-height="1080" data-track-kind="captions" style="z-index:5"></div>
+      <div id="fx" class="clip" data-composition-id="fx" data-composition-src="compositions/fx.html" data-start="0" data-duration="155.4" data-track-index="1" data-width="1920" data-height="1080" data-track-kind="graphics" style="z-index:4"></div>
+      <div id="intro" class="clip" data-composition-id="intro" data-composition-src="compositions/intro.html" data-start="6.0" data-duration="6.4" data-track-index="2" data-width="1920" data-height="1080" data-track-kind="graphics" style="z-index:6"></div>
+      <div id="outro" class="clip" data-composition-id="outro" data-composition-src="compositions/outro.html" data-start="147.6" data-duration="7.8" data-track-index="2" data-width="1920" data-height="1080" data-track-kind="graphics" style="z-index:6"></div>
+      <audio id="song" class="clip" src="assets/mix.mp3" data-start="0" data-duration="155.4" data-volume="1" data-track-index="5"></audio>
+    </div>
+    <script>
+      window.__timelines = window.__timelines || {};
+      const tl = gsap.timeline({ paused: true });
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},57.76); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},57.83);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},58.56); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},58.63);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},59.68); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},59.75);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},88.9); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},88.97);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},124.5); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},124.57);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},125.2); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},125.27);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},125.9); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},125.97);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},126.5); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},126.57);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},127.8); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},127.87);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},131.0); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},131.07);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},136.3); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},136.37);
+      tl.fromTo("#base",{scale:1},{scale:1.06,duration:0.07,ease:"power2.out",immediateRender:false},143.06); tl.fromTo("#base",{scale:1.06},{scale:1,duration:0.4,ease:"power2.out",immediateRender:false},143.13);
+      window.__timelines["main"] = tl;
+      tl.seek(0);
+    </script>
+  </body>
+</html>
