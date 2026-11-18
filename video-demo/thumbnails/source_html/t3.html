@@ -1,0 +1,18 @@
+<!doctype html><html><head><meta charset="utf-8"><link rel="stylesheet" href="base.css"><style>
+.half { position:absolute; inset:0; overflow:hidden; }
+.L { clip-path: polygon(0 0, 58% 0, 42% 100%, 0 100%); }
+.R { clip-path: polygon(58% 0, 100% 0, 100% 100%, 42% 100%); }
+.L img { position:absolute; width: 1600px; height: 900px; left: -330px; top: -60px; object-fit: cover; }
+.R img { position:absolute; width: 1500px; height: 844px; left: -60px; top: -40px; object-fit: cover; filter: saturate(.85) brightness(.92); }
+.crack { position:absolute; inset:0; background: linear-gradient(105deg, transparent 49.2%, rgba(255,255,255,.95) 49.8%, rgba(255,210,140,.9) 50.2%, transparent 50.8%); filter: drop-shadow(0 0 12px rgba(255,200,120,.9)); }
+.shade { position:absolute; inset:0; background: linear-gradient(0deg, rgba(0,0,0,.9) 0%, rgba(0,0,0,.4) 26%, transparent 46%), linear-gradient(180deg, rgba(0,0,0,.55) 0%, transparent 22%); }
+.lab { top: 22px; font-family: "Rozha"; font-size: 78px; color:#fff; text-shadow: 0 4px 0 rgba(0,0,0,.55), 0 0 20px rgba(0,0,0,.7); }
+.k { left: 44px; color: #ffd27a; } .a { right: 44px; color: #9fd0ff; }
+.t { left: 0; width: 100%; bottom: 40px; text-align:center; font-size: 118px; filter: drop-shadow(0 6px 0 rgba(0,0,0,.6)) drop-shadow(0 0 30px rgba(255,160,60,.5)); }
+</style></head><body><div class="stage">
+<div class="half L"><img src="../frames/c12_4.0.png"></div>
+<div class="half R"><img src="../frames/c17_7.6.png"></div>
+<div class="crack"></div><div class="shade"></div>
+<div class="abs lab k">कल</div><div class="abs lab a">आज</div>
+<div class="abs hi t gold">तेरा इंतज़ार है</div>
+</div></body></html>
