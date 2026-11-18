@@ -11,3 +11,5 @@ salman/hf/renders/
 salman/hf/.hyperframes/
 salman/hf/assets/base.mp4
 salman/hf/node_modules/
+salman/clean/
+__pycache__/
